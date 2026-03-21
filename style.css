@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap");
+
+:root {
+    --cream:      #fdf6e8;
+    --parchment:  #e8d5b0;
+    --rose-deep:  #7b1a2e;
+    --rose-mid:   #b83b5e;
+    --gold:       #c9a84c;
+    --ink:        #2c1810;
+    --dark-bg:    #0e0405;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-script:'Dancing Script', cursive;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+    width:100%; height:100%;
+    overflow:hidden;
+    background:var(--dark-bg);
+    font-family:var(--font-serif);
+}
+
+/* ── Partículas ── */
+#bg-particles {
+    position:fixed; inset:0;
+    pointer-events:none; z-index:1;
+}
+
+/* ── Canvas 3D ── */
+#container3d {
+    position:fixed; inset:0;
+    width:100vw; height:100vh; z-index:2;
+}
+
+/* ── UI sobre el 3D ── */
+#ui-container {
+    position:fixed; inset:0; z-index:10;
+    pointer-events:none;
+    display:flex; flex-direction:column; align-items:center;
+}
+
+/* ── Hint flotante ── */
+#instructions {
+    margin-top:28px;
+    padding:11px 30px;
+    pointer-events:auto;
+    background:rgba(14,4,5,0.55);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(201,168,76,0.3);
+    border-radius:50px;
+    color:var(--parchment);
+    font-size:1rem;
+    font-style:italic;
+    letter-spacing:0.06em;
+    text-shadow:0 1px 6px rgba(0,0,0,0.7);
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+    animation:float 3s ease-in-out infinite;
+    transition:opacity 0.5s ease;
+}
+#instructions.fade-out { opacity:0; pointer-events:none; }
+
+@keyframes float {
+    0%,100%{ transform:translateY(0); }
+    50%    { transform:translateY(-5px); }
+}
+
+.heart-icon {
+    display:inline-block;
+    animation:heartbeat 1.6s ease-in-out infinite;
+    margin:0 4px;
+}
+@keyframes heartbeat {
+    0%,100%{ transform:scale(1); }
+    50%    { transform:scale(1.25); }
+}
+
+/* ── Popup final ── */
+#romantic-message {
+    position:fixed; inset:0; z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    pointer-events:none;
+    background:radial-gradient(ellipse at center,
+        rgba(123,26,46,0.25) 0%, rgba(14,4,5,0.85) 100%);
+}
+#romantic-message.hidden { display:none !important; }
+
+.message-popup {
+    text-align:center;
+    background:linear-gradient(135deg,rgba(253,248,238,.97),rgba(245,232,204,.97));
+    padding:38px 60px;
+    border-radius:60px;
+    border:1px solid rgba(201,168,76,0.45);
+    backdrop-filter:blur(20px);
+    box-shadow:0 24px 50px rgba(0,0,0,0.4), 0 0 0 6px rgba(201,168,76,0.08);
+    animation:popIn .6s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn {
+    from{opacity:0;transform:scale(0.3);}
+    to  {opacity:1;transform:scale(1);}
+}
+.big-heart {
+    font-size:3.5rem; display:block; margin-bottom:12px;
+    animation:pulseHeart .9s ease-in-out infinite;
+    filter:drop-shadow(0 0 12px rgba(184,59,94,0.5));
+}
+@keyframes pulseHeart {
+    0%,100%{transform:scale(1);}
+    50%    {transform:scale(1.22);}
+}
+.message-popup p {
+    font-family:var(--font-script);
+    font-size:1.8rem; color:var(--rose-mid); line-height:1.2;
+}
+
+/* ── Loading ── */
+#loading-screen {
+    position:fixed; inset:0; z-index:200;
+    background:var(--dark-bg);
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity 1s ease, visibility 1s ease;
+}
+#loading-screen.fade-out { opacity:0; visibility:hidden; pointer-events:none; }
+
+.loading-inner { display:flex; flex-direction:column; align-items:center; gap:18px; }
+.loading-rose  { font-size:3.5rem; animation:spin-slow 5s linear infinite; filter:drop-shadow(0 0 16px rgba(184,59,94,0.6)); }
+@keyframes spin-slow { to{transform:rotate(360deg);} }
+
+.loading-bar-track { width:160px; height:1px; background:rgba(201,168,76,0.2); overflow:hidden; }
+.loading-bar-fill  { height:100%; background:linear-gradient(90deg,transparent,var(--gold),transparent); animation:sweep 1.4s ease-in-out infinite; }
+@keyframes sweep { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+
+.loading-label { color:var(--parchment); font-style:italic; font-size:.9rem; letter-spacing:.2em; opacity:.65; }
+
+/* ── Responsive ── */
+@media(max-width:600px){
+    #instructions { font-size:.85rem; padding:9px 20px; }
+    .message-popup { padding:28px 36px; }
+    .message-popup p { font-size:1.4rem; }
+}

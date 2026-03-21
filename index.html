@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>✨ Un Romance en 3D ✨</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+    <!-- CARGA -->
+    <div id="loading-screen">
+        <div class="loading-inner">
+            <div class="loading-rose">🌹</div>
+            <div class="loading-bar-track"><div class="loading-bar-fill"></div></div>
+            <p class="loading-label">preparando el momento...</p>
+        </div>
+    </div>
+
+    <!-- PARTÍCULAS FONDO -->
+    <canvas id="bg-particles"></canvas>
+
+    <!-- UI -->
+    <div id="ui-container">
+        <div id="instructions">
+            <span class="heart-icon">❤️</span> Cargando... <span class="heart-icon">❤️</span>
+        </div>
+
+        <!-- Mensaje romántico final -->
+        <div id="romantic-message" class="hidden">
+            <div class="message-popup">
+                <span class="big-heart">💖</span>
+                <p>Para ti, mi amor eterno</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CANVAS 3D -->
+    <div id="container3d"></div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three":         "https://unpkg.com/three@0.158.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
